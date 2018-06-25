@@ -1,9 +1,9 @@
-package designModel;
+package designModel.deco;
 
-import designModel.component.BrakeBread;
-import designModel.component.Bread;
-import designModel.decoration.AddBarbecue;
-import designModel.decoration.AddLettuce;
+import designModel.deco.component.BrakeBread;
+import designModel.deco.component.Bread;
+import designModel.deco.decoration.AddBarbecue;
+import designModel.deco.decoration.AddLettuce;
 
 /**
  * 客户端

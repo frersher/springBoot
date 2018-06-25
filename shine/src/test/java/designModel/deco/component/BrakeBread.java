@@ -1,4 +1,4 @@
-package designModel.component;
+package designModel.deco.component;
 
 /**
  * 烧饼

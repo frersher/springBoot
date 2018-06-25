@@ -1,4 +1,4 @@
-package designModel.component;
+package designModel.deco.component;
 
 /**
  * 装饰模式的顶级父类

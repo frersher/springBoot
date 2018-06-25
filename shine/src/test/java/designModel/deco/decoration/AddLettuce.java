@@ -1,6 +1,6 @@
-package designModel.decoration;
+package designModel.deco.decoration;
 
-import designModel.component.Bread;
+import designModel.deco.component.Bread;
 
 /**
  * 加生菜
