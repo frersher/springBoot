@@ -21,6 +21,24 @@ public class Customer {
     }
 
     public String statement(){
-        return null;
+        double totalAmout =0L;
+        int  frequentRenterPoints=0;
+        String result = "Rental Record for "+getName()+"/n";
+
+        for(Rental rental:rentals){
+            double thisAmount =rental.getCharge();
+
+
+            frequentRenterPoints++;
+            result+="\t"+rental.getMovie().getTitle()+"\t"+String.valueOf(thisAmount)+"\n";
+            totalAmout+=thisAmount;
+        }
+        result+="Amount owed is "+String.valueOf(totalAmout)+"\n";
+        result+="you earned "+String.valueOf(frequentRenterPoints)+" frequent renter points "+"\n";
+
+
+        return result;
     }
+
+
 }
