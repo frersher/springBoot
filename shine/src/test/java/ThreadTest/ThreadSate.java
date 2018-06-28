@@ -1,6 +1,4 @@
-package ThreadTest;
-
-import java.util.concurrent.TimeUnit;
+package threadTest;
 
 /**
  * @program: demo
