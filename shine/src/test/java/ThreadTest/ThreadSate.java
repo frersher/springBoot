@@ -47,7 +47,7 @@ public class ThreadSate {
         public void run() {
             synchronized (Blocked.class){
                 while (true){
-                    SleepUtils.second(100);
+                    threadTest.SleepUtils.second(100);
                 }
             }
         }
