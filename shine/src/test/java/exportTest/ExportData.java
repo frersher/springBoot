@@ -29,7 +29,7 @@ public class ExportData {
         Cell cel3 = row.createCell(2);
         cel3.setCellValue("3");
         Cell cel4 = row.createCell(3);
-        // ---------------------------
+      /*  // ---------------------------
         List<valuedatabean> list = new ArrayList<valuedatabean>();
         // 数据库中存储的数据行
         int page_size = 10000;
@@ -59,7 +59,7 @@ public class ExportData {
         FileOutputStream fileOut = new FileOutputStream(path);
         wb.write(fileOut);
         fileOut.close();
-        wb.dispose();
+        wb.dispose();*/
     }
 
 }
