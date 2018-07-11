@@ -7,19 +7,36 @@ package refactor;
  * @create 2018-06-28 17:28
  **/
 public class Movie {
-    public static final int CHILDRENS=2;
-    public static final int REGULAR=0;
-    public static final  int NEW_RELEASE=1;
+    public static final int CHILDRENS = 2;
+    public static final int REGULAR = 0;
+    public static final int NEW_RELEASE = 1;
 
-    private   int priceCode;
+    private Price price;
     private String title;
 
-    public int getPriceCode() {
-        return priceCode;
+
+    public Movie(int priceCode, String title) {
+        this.title = title;
+        setPriceCode(priceCode);
     }
 
-    public void setPriceCode(int priceCode) {
-        this.priceCode = priceCode;
+    public int getPriceCode() {
+        return price.getPriceCode();
+    }
+
+    public void setPriceCode(int arg) {
+        switch (arg) {
+            case REGULAR:
+                price = new RegularPrice();
+                break;
+            case CHILDRENS:
+                price = new ChildrensPrice();
+            case NEW_RELEASE:
+                price = new NewReleasePrice();
+            default:
+                throw new IllegalArgumentException("Incorrect Price Code");
+
+        }
     }
 
     public String getTitle() {
@@ -32,35 +49,13 @@ public class Movie {
 
 
     //计算价格
-    public double getCharge(int daysRented){
-        double result =0L;
-        switch (getPriceCode()){
-            case Movie.REGULAR:
-                result+=2;
-                if(daysRented>2){
-                    result+=(daysRented-2)*1.5;
-                }
-                break;
-            case Movie.CHILDRENS:
-                result+=1.5;
-                if(daysRented>3){
-                    result+=(daysRented-3)*1.5;
-                }
-            case  Movie.NEW_RELEASE:
-                result+=daysRented*3;
-
-
-        }
-        return result;
+    public double getCharge(int daysRented) {
+        return price.getCharge(daysRented);
     }
 
 
     //计算积分
-    public   int getFrequentPoints(int daysRented){
-        if(getPriceCode() == Movie.NEW_RELEASE && daysRented>1){
-            return  2;
-        }else{
-            return  1;
-        }
+    public int getFrequentPoints(int daysRented) {
+        return price.getFrequentPoints(daysRented);
     }
 }
