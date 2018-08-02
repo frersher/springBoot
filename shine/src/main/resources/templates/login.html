@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <meta chaset="utf-8"/>
+    <title>登录</title>
+</head>
+
+<body>
+<form  name="loginfrom" accept-charset="utf-8" method="post">
+    <label class="label-tips" for="u">账号:</label>
+    <input type="text" id="u" name="userName" class="inputstyle"/>
+    <div>
+        <label class="lable-tips" for="password">密码:</label>
+        <input type="password" id="password" name="password" class="inputstyle" />
+    </div>
+    <input id="loginBtn" type="submit" name="登录"/>
+    <a href="register.html" class="zcxy" target="_blank">注册</a>
+</form>
+</body>
+
+<script>
+$("#loginBtn").click(function () {
+    console.log("------%%%");
+    var param="";
+    param.userName= $("#u").val();
+    param.password= $("#password").val();
+    $.ajax({
+        type: "POST",
+        url: "user/loginPost",
+        dataType:"json",
+        data:param,
+        success:function(data){
+
+        }
+    });
+})
+</script>
+
+</html>
