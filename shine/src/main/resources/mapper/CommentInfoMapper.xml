@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shine.mapper.CommentInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.shine.model.CommentInfo" >
+    <id column="COMMENTS_ID" property="commentsId" jdbcType="INTEGER" />
+    <result column="ARTICLE_ID" property="articleId" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="CREATED" property="created" jdbcType="TIMESTAMP" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="INTEGER" />
+    <result column="LASTUPDATED" property="lastupdated" jdbcType="TIMESTAMP" />
+    <result column="LASTUPDATED_BY" property="lastupdatedBy" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shine.model.CommentInfo" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    COMMENTS_ID, ARTICLE_ID, USER_ID, CREATED, CREATED_BY, LASTUPDATED, LASTUPDATED_BY
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.shine.model.CommentInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from COMMENT_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shine.model.CommentInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from COMMENT_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from COMMENT_INFO
+    where COMMENTS_ID = #{commentsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from COMMENT_INFO
+    where COMMENTS_ID = #{commentsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shine.model.CommentInfoExample" >
+    delete from COMMENT_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shine.model.CommentInfo" >
+    insert into COMMENT_INFO (COMMENTS_ID, ARTICLE_ID, USER_ID, 
+      CREATED, CREATED_BY, LASTUPDATED, 
+      LASTUPDATED_BY, CONTENT)
+    values (#{commentsId,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{created,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=INTEGER}, #{lastupdated,jdbcType=TIMESTAMP}, 
+      #{lastupdatedBy,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shine.model.CommentInfo" >
+    insert into COMMENT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentsId != null" >
+        COMMENTS_ID,
+      </if>
+      <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="created != null" >
+        CREATED,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="lastupdated != null" >
+        LASTUPDATED,
+      </if>
+      <if test="lastupdatedBy != null" >
+        LASTUPDATED_BY,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentsId != null" >
+        #{commentsId,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdated != null" >
+        #{lastupdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatedBy != null" >
+        #{lastupdatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shine.model.CommentInfoExample" resultType="java.lang.Integer" >
+    select count(*) from COMMENT_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update COMMENT_INFO
+    <set >
+      <if test="record.commentsId != null" >
+        COMMENTS_ID = #{record.commentsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleId != null" >
+        ARTICLE_ID = #{record.articleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.created != null" >
+        CREATED = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdBy != null" >
+        CREATED_BY = #{record.createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastupdated != null" >
+        LASTUPDATED = #{record.lastupdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastupdatedBy != null" >
+        LASTUPDATED_BY = #{record.lastupdatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update COMMENT_INFO
+    set COMMENTS_ID = #{record.commentsId,jdbcType=INTEGER},
+      ARTICLE_ID = #{record.articleId,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      CREATED = #{record.created,jdbcType=TIMESTAMP},
+      CREATED_BY = #{record.createdBy,jdbcType=INTEGER},
+      LASTUPDATED = #{record.lastupdated,jdbcType=TIMESTAMP},
+      LASTUPDATED_BY = #{record.lastupdatedBy,jdbcType=INTEGER},
+      CONTENT = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update COMMENT_INFO
+    set COMMENTS_ID = #{record.commentsId,jdbcType=INTEGER},
+      ARTICLE_ID = #{record.articleId,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      CREATED = #{record.created,jdbcType=TIMESTAMP},
+      CREATED_BY = #{record.createdBy,jdbcType=INTEGER},
+      LASTUPDATED = #{record.lastupdated,jdbcType=TIMESTAMP},
+      LASTUPDATED_BY = #{record.lastupdatedBy,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shine.model.CommentInfo" >
+    update COMMENT_INFO
+    <set >
+      <if test="articleId != null" >
+        ARTICLE_ID = #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        CREATED = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdated != null" >
+        LASTUPDATED = #{lastupdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatedBy != null" >
+        LASTUPDATED_BY = #{lastupdatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where COMMENTS_ID = #{commentsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shine.model.CommentInfo" >
+    update COMMENT_INFO
+    set ARTICLE_ID = #{articleId,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      CREATED = #{created,jdbcType=TIMESTAMP},
+      CREATED_BY = #{createdBy,jdbcType=INTEGER},
+      LASTUPDATED = #{lastupdated,jdbcType=TIMESTAMP},
+      LASTUPDATED_BY = #{lastupdatedBy,jdbcType=INTEGER},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where COMMENTS_ID = #{commentsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shine.model.CommentInfo" >
+    update COMMENT_INFO
+    set ARTICLE_ID = #{articleId,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      CREATED = #{created,jdbcType=TIMESTAMP},
+      CREATED_BY = #{createdBy,jdbcType=INTEGER},
+      LASTUPDATED = #{lastupdated,jdbcType=TIMESTAMP},
+      LASTUPDATED_BY = #{lastupdatedBy,jdbcType=INTEGER}
+    where COMMENTS_ID = #{commentsId,jdbcType=INTEGER}
+  </update>
+</mapper>

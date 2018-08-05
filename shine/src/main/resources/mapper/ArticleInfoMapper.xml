@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shine.mapper.ArticleInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.shine.model.ArticleInfo" >
+    <id column="ARTICLE_ID" property="articleId" jdbcType="INTEGER" />
+    <result column="ARTICLE_AUTHOR" property="articleAuthor" jdbcType="VARCHAR" />
+    <result column="ARTICLE_DATE" property="articleDate" jdbcType="TIMESTAMP" />
+    <result column="ARTICLE_CATEGORY" property="articleCategory" jdbcType="VARCHAR" />
+    <result column="ARTICLE_STATUS" property="articleStatus" jdbcType="VARCHAR" />
+    <result column="DISPLAYORDER" property="displayorder" jdbcType="REAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shine.model.ArticleInfoWithBLOBs" extends="BaseResultMap" >
+    <result column="ARTICLE_CONTENT" property="articleContent" jdbcType="LONGVARCHAR" />
+    <result column="ARTICLE_TITLE" property="articleTitle" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ARTICLE_ID, ARTICLE_AUTHOR, ARTICLE_DATE, ARTICLE_CATEGORY, ARTICLE_STATUS, DISPLAYORDER
+  </sql>
+  <sql id="Blob_Column_List" >
+    ARTICLE_CONTENT, ARTICLE_TITLE
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.shine.model.ArticleInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ARTICLE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shine.model.ArticleInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ARTICLE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ARTICLE_INFO
+    where ARTICLE_ID = #{articleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ARTICLE_INFO
+    where ARTICLE_ID = #{articleId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shine.model.ArticleInfoExample" >
+    delete from ARTICLE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shine.model.ArticleInfoWithBLOBs" >
+    insert into ARTICLE_INFO (ARTICLE_ID, ARTICLE_AUTHOR, ARTICLE_DATE, 
+      ARTICLE_CATEGORY, ARTICLE_STATUS, DISPLAYORDER, 
+      ARTICLE_CONTENT, ARTICLE_TITLE)
+    values (#{articleId,jdbcType=INTEGER}, #{articleAuthor,jdbcType=VARCHAR}, #{articleDate,jdbcType=TIMESTAMP}, 
+      #{articleCategory,jdbcType=VARCHAR}, #{articleStatus,jdbcType=VARCHAR}, #{displayorder,jdbcType=REAL}, 
+      #{articleContent,jdbcType=LONGVARCHAR}, #{articleTitle,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shine.model.ArticleInfoWithBLOBs" >
+    insert into ARTICLE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+      <if test="articleAuthor != null" >
+        ARTICLE_AUTHOR,
+      </if>
+      <if test="articleDate != null" >
+        ARTICLE_DATE,
+      </if>
+      <if test="articleCategory != null" >
+        ARTICLE_CATEGORY,
+      </if>
+      <if test="articleStatus != null" >
+        ARTICLE_STATUS,
+      </if>
+      <if test="displayorder != null" >
+        DISPLAYORDER,
+      </if>
+      <if test="articleContent != null" >
+        ARTICLE_CONTENT,
+      </if>
+      <if test="articleTitle != null" >
+        ARTICLE_TITLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="articleAuthor != null" >
+        #{articleAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="articleDate != null" >
+        #{articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleCategory != null" >
+        #{articleCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="articleStatus != null" >
+        #{articleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null" >
+        #{displayorder,jdbcType=REAL},
+      </if>
+      <if test="articleContent != null" >
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articleTitle != null" >
+        #{articleTitle,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shine.model.ArticleInfoExample" resultType="java.lang.Integer" >
+    select count(*) from ARTICLE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ARTICLE_INFO
+    <set >
+      <if test="record.articleId != null" >
+        ARTICLE_ID = #{record.articleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleAuthor != null" >
+        ARTICLE_AUTHOR = #{record.articleAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleDate != null" >
+        ARTICLE_DATE = #{record.articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.articleCategory != null" >
+        ARTICLE_CATEGORY = #{record.articleCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleStatus != null" >
+        ARTICLE_STATUS = #{record.articleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displayorder != null" >
+        DISPLAYORDER = #{record.displayorder,jdbcType=REAL},
+      </if>
+      <if test="record.articleContent != null" >
+        ARTICLE_CONTENT = #{record.articleContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.articleTitle != null" >
+        ARTICLE_TITLE = #{record.articleTitle,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update ARTICLE_INFO
+    set ARTICLE_ID = #{record.articleId,jdbcType=INTEGER},
+      ARTICLE_AUTHOR = #{record.articleAuthor,jdbcType=VARCHAR},
+      ARTICLE_DATE = #{record.articleDate,jdbcType=TIMESTAMP},
+      ARTICLE_CATEGORY = #{record.articleCategory,jdbcType=VARCHAR},
+      ARTICLE_STATUS = #{record.articleStatus,jdbcType=VARCHAR},
+      DISPLAYORDER = #{record.displayorder,jdbcType=REAL},
+      ARTICLE_CONTENT = #{record.articleContent,jdbcType=LONGVARCHAR},
+      ARTICLE_TITLE = #{record.articleTitle,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ARTICLE_INFO
+    set ARTICLE_ID = #{record.articleId,jdbcType=INTEGER},
+      ARTICLE_AUTHOR = #{record.articleAuthor,jdbcType=VARCHAR},
+      ARTICLE_DATE = #{record.articleDate,jdbcType=TIMESTAMP},
+      ARTICLE_CATEGORY = #{record.articleCategory,jdbcType=VARCHAR},
+      ARTICLE_STATUS = #{record.articleStatus,jdbcType=VARCHAR},
+      DISPLAYORDER = #{record.displayorder,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shine.model.ArticleInfoWithBLOBs" >
+    update ARTICLE_INFO
+    <set >
+      <if test="articleAuthor != null" >
+        ARTICLE_AUTHOR = #{articleAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="articleDate != null" >
+        ARTICLE_DATE = #{articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleCategory != null" >
+        ARTICLE_CATEGORY = #{articleCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="articleStatus != null" >
+        ARTICLE_STATUS = #{articleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null" >
+        DISPLAYORDER = #{displayorder,jdbcType=REAL},
+      </if>
+      <if test="articleContent != null" >
+        ARTICLE_CONTENT = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articleTitle != null" >
+        ARTICLE_TITLE = #{articleTitle,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ARTICLE_ID = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shine.model.ArticleInfoWithBLOBs" >
+    update ARTICLE_INFO
+    set ARTICLE_AUTHOR = #{articleAuthor,jdbcType=VARCHAR},
+      ARTICLE_DATE = #{articleDate,jdbcType=TIMESTAMP},
+      ARTICLE_CATEGORY = #{articleCategory,jdbcType=VARCHAR},
+      ARTICLE_STATUS = #{articleStatus,jdbcType=VARCHAR},
+      DISPLAYORDER = #{displayorder,jdbcType=REAL},
+      ARTICLE_CONTENT = #{articleContent,jdbcType=LONGVARCHAR},
+      ARTICLE_TITLE = #{articleTitle,jdbcType=LONGVARCHAR}
+    where ARTICLE_ID = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shine.model.ArticleInfo" >
+    update ARTICLE_INFO
+    set ARTICLE_AUTHOR = #{articleAuthor,jdbcType=VARCHAR},
+      ARTICLE_DATE = #{articleDate,jdbcType=TIMESTAMP},
+      ARTICLE_CATEGORY = #{articleCategory,jdbcType=VARCHAR},
+      ARTICLE_STATUS = #{articleStatus,jdbcType=VARCHAR},
+      DISPLAYORDER = #{displayorder,jdbcType=REAL}
+    where ARTICLE_ID = #{articleId,jdbcType=INTEGER}
+  </update>
+</mapper>

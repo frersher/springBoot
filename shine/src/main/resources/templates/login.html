@@ -7,27 +7,28 @@
 </head>
 
 <body>
-<form  name="loginfrom" accept-charset="utf-8" method="post">
+南春回忘
+<div>
     <label class="label-tips" for="u">账号:</label>
-    <input type="text" id="u" name="userName" class="inputstyle"/>
+    <input type="text" id="u" name="userNick" class="inputstyle"/>
     <div>
         <label class="lable-tips" for="password">密码:</label>
         <input type="password" id="password" name="password" class="inputstyle" />
     </div>
     <input id="loginBtn" type="submit" name="登录"/>
     <a href="register.html" class="zcxy" target="_blank">注册</a>
-</form>
+</div>
 </body>
 
 <script>
 $("#loginBtn").click(function () {
     console.log("------%%%");
     var param="";
-    param.userName= $("#u").val();
+    param.userNick= $("#u").val();
     param.password= $("#password").val();
     $.ajax({
         type: "POST",
-        url: "user/loginPost",
+        url: "loginPost",
         dataType:"json",
         data:param,
         success:function(data){
