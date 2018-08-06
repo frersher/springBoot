@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shine.dao.UserInfoDao" >
+  <resultMap id="BaseResultMap" type="com.shine.model.UserInfo" >
+    <id column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="USER_TEL" property="userTel" jdbcType="VARCHAR" />
+    <result column="USER_NICK" property="userNick" jdbcType="VARCHAR" />
+    <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR" />
+    <result column="USER_MAIL" property="userMail" jdbcType="VARCHAR" />
+    <result column="USER_ROLE" property="userRole" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="conditionParams">
+    <where>
+      1=1
+      <if test="userId != null">
+        AND user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="userTel != null and userTel != ''">
+        AND USER_TEL = #{userTel,jdbcType=VARCHAR}
+      </if>
+      <if test="userNick != null and userNick != ''">
+        AND USER_NICK = #{userNick,jdbcType=VARCHAR}
+      </if>
+      <if test="userPassword != null and userPassword != ''">
+        AND USER_PASSWORD = #{userPassword,jdbcType=VARCHAR}
+      </if>
+      <if test="userMail != null and userMail != ''">
+        AND USER_MAIL = #{userMail,jdbcType=VARCHAR}
+      </if>
+      <if test="userRole != null and userRole != ''">
+        AND USER_ROLE = #{userRole,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_TEL, USER_NICK, USER_PASSWORD, USER_MAIL, USER_ROLE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shine.basic.rep.UserQuery" >
+    select
+      distinct
+    <include refid="Base_Column_List" />
+    from USER_INFO
+    <include refid="conditionParams"/>
+    ORDER by USER_ID
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from USER_INFO
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from USER_INFO
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.shine.model.UserInfo" >
+    insert into USER_INFO (USER_ID, USER_TEL, USER_NICK, 
+      USER_PASSWORD, USER_MAIL, USER_ROLE
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userTel,jdbcType=VARCHAR}, #{userNick,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userMail,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <select id="countByExample" parameterType="com.shine.basic.rep.UserQuery" resultType="java.lang.Integer" >
+    select count(*) from USER_INFO
+    <include refid="conditionParams" />
+  </select>
+
+  <update id="updateByPrimaryKey" parameterType="com.shine.model.UserInfo" >
+    update USER_INFO
+    <set >
+      <if test="userTel != null" >
+        USER_TEL = #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userNick != null" >
+        USER_NICK = #{userNick,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userMail != null" >
+        USER_MAIL = #{userMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null" >
+        USER_ROLE = #{userRole,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByTel" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from USER_INFO
+    where USER_TEL = #{userTel,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByMail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from USER_INFO
+    where USER_MAIL = #{userMail,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByUserInfo" resultMap="BaseResultMap" parameterType="com.shine.model.UserInfo" >
+    select
+    <include refid="Base_Column_List" />
+    from USER_INFO
+    WHERE 1 = 1
+    <if test="!(userId == 0||userId==null)" >
+      AND USER_ID = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="userTel != null" >
+      AND USER_TEL = #{userTel,jdbcType=VARCHAR},
+    </if>
+    <if test="userName != null" >
+      AND USER_NAME = #{userName,jdbcType=VARCHAR},
+    </if>
+    <if test="userPassword != null" >
+      AND USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+    </if>
+    <if test="userMail != null" >
+      AND USER_MAIL = #{userMail,jdbcType=VARCHAR},
+    </if>
+    <if test="userRole != null" >
+      AND USER_ROLE = #{userRole,jdbcType=INTEGER}
+    </if>
+  </select>
+</mapper>

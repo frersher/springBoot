@@ -1,6 +1,7 @@
 package com.shine.service;
 
 import com.shine.basic.QueryParams;
+import com.shine.basic.rep.UserQuery;
 import com.shine.model.UserInfo;
 
 import java.util.List;
@@ -16,25 +17,17 @@ public interface UserService {
 
     String insert(UserInfo record);
 
-    int insertSelective(UserInfo record);
-
-
     UserInfo selectByPrimaryKey(Integer userId);
 
     UserInfo selectByTel(String tel);
 
     UserInfo selectByMail(String mail);
 
-    String updateByPrimaryKeySelective(UserInfo record);
-
     String updateByPrimaryKey(UserInfo record);
 
-    List<UserInfo> userListByCondition(QueryParams qp);
+    List<UserInfo> userListByCondition(UserQuery userQuery);
 
-    int userListByConditionCount(QueryParams qp);
-
-
-    int update(UserInfo record);
+    int userListByConditionCount(UserQuery userQuery);
 
     List<UserInfo> selectByUserInfo(UserInfo u);
 

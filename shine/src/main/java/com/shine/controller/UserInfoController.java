@@ -1,15 +1,18 @@
 package com.shine.controller;
 
-import com.shine.model.User;
-import org.springframework.http.HttpRequest;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.shine.basic.rep.UserQuery;
+import com.shine.basic.rsp.PageResponse;
+import com.shine.model.UserInfo;
+import com.shine.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 用户管理
@@ -20,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/user/*")
 public class UserInfoController {
+    @Resource
+    private UserService userService;
 
     @GetMapping("/login")
     public String login() {
@@ -28,12 +33,23 @@ public class UserInfoController {
 
 
     @RequestMapping("/loginPost")
-    public String login(User user) {
-//        String username = request.getParameter("username");
-//        String password = request.getParameter("password");
-
-        System.out.println("username :"+user.getUserNick()+" password:"+user.getPassword());
+    public String loginPost(UserInfo user) {
+        System.out.println("username :"+user.getUserNick()+" password:"+user.getUserPassword());
         return "index";
+    }
+
+
+    @RequestMapping("/queryPageUser")
+    public  PageResponse<List<UserInfo>>  queryPageUser(){
+        PageResponse<List<UserInfo>> response = new PageResponse();
+        UserQuery userQuery = new UserQuery();
+        PageHelper.startPage(2,2);
+        Page<UserInfo> userList = (Page<UserInfo>)userService.userListByCondition(userQuery);
+        response.setCount(userList.getTotal());
+        response.setPageNum(userList.getPageNum());
+        response.setPages(userList.getPages());
+        response.setData(userList.getResult());
+        return  response;
     }
 
 }

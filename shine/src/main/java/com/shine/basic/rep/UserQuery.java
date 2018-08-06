@@ -1,10 +1,20 @@
-package com.shine.model;
+package com.shine.basic.rep;
 
-import lombok.Data;
+import java.io.Serializable;
+
+import com.shine.basic.BaseRequest;
 import lombok.Getter;
 import lombok.Setter;
 
-public class UserInfo {
+/**
+ * 用户查询
+ *
+ * @author wb-cb236432
+ * @create 2018-08-06 15:20
+ **/
+public class UserQuery extends BaseRequest implements Serializable {
+    private static final long serialVersionUID = -8817777504282488627L;
+
     @Setter
     @Getter
     private Integer userId;
@@ -28,5 +38,4 @@ public class UserInfo {
     @Setter
     @Getter
     private String userRole;
-
 }

@@ -1,15 +1,14 @@
 package com.shine.service.impl;
 
-import com.shine.basic.QueryParams;
-import com.shine.basic.QueryParamsDeal;
-import com.shine.mapper.UserInfoMapper;
+import com.shine.basic.rep.UserQuery;
+import com.shine.dao.UserInfoDao;
 import com.shine.model.UserInfo;
-import com.shine.model.UserInfoExample;
 import com.shine.service.UserService;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 /**
  * @program: demo
@@ -17,14 +16,14 @@ import java.util.List;
  * @author: bang.chen
  * @create: 2018-08-05 16:44
  **/
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
     @Resource
-    private UserInfoMapper userInfoMapper;
+    private UserInfoDao userInfoDao;
 
     @Override
     public String deleteByPrimaryKey(Integer userId) {
-        int result = userInfoMapper.deleteByPrimaryKey(userId);
+        int result = userInfoDao.deleteByPrimaryKey(userId);
         if(result<0){
             return "failure";
         }else{
@@ -35,14 +34,14 @@ public class UserServiceImpl implements UserService {
 
     //根据id查所有liang
     public UserInfo selectByUserId(int id){
-        return userInfoMapper.selectByPrimaryKey(id);
+        return userInfoDao.selectByPrimaryKey(id);
     }
 
 
     public String insert(UserInfo record) {
         // TODO Auto-generated method stub
         try {
-            int i = userInfoMapper.insert(record);
+            int i = userInfoDao.insert(record);
             if (i != 1) {
                 return "failure";
             }
@@ -53,20 +52,15 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public int insertSelective(UserInfo record) {
-        return 0;
-    }
-
 
     //通过ID查找
     public UserInfo selectByPrimaryKey(Integer userId) {
         // TODO Auto-generated method stub
-        return userInfoMapper.selectByPrimaryKey(userId);
+        return userInfoDao.selectByPrimaryKey(userId);
     }
 
     public UserInfo selectByTel(String tel) {
-        List<UserInfo> list = userInfoMapper.selectByTel(tel);
+        List<UserInfo> list = userInfoDao.selectByTel(tel);
         if (list != null) {
             if (list.size() > 0) {
                 return list.get(0);
@@ -76,7 +70,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserInfo selectByMail(String mail) {
-        List<UserInfo> list = userInfoMapper.selectByMail(mail);
+        List<UserInfo> list = userInfoDao.selectByMail(mail);
         if (list != null) {
             if (list.size() > 0) {
                 return list.get(0);
@@ -86,18 +80,10 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public String updateByPrimaryKeySelective(UserInfo record) {
-        // TODO Auto-generated method stub
-        int i = userInfoMapper.updateByPrimaryKeySelective(record);
-        if (i != 1) {
-            return "failure";
-        }
-        return "success";
-    }
-
+    @Override
     public String updateByPrimaryKey(UserInfo record) {
         // TODO Auto-generated method stub
-        int i = userInfoMapper.updateByPrimaryKey(record);
+        int i = userInfoDao.updateByPrimaryKey(record);
         if (i != 1) {
             return "failure";
         }
@@ -105,31 +91,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserInfo> userListByCondition(QueryParams qp) {
-        QueryParamsDeal qpd = new QueryParamsDeal(qp);
-        UserInfoExample example = new UserInfoExample();
-        example.setQueryParams(qp.AND + qpd.getParams());
-        example.setOrderByClause(qp.getOrderByClause());
-        example.setLimitByClause(qp.getPagesMysql());
-        return userInfoMapper.selectByExample(example);
+    public List<UserInfo> userListByCondition(UserQuery userQuery) {
+        return userInfoDao.selectByExample(userQuery);
     }
 
     @Override
-    public int userListByConditionCount(QueryParams qp) {
-        QueryParamsDeal qpd = new QueryParamsDeal(qp);
-        UserInfoExample example = new UserInfoExample();
-        example.setQueryParams(qp.AND + qpd.getParams());
-        return userInfoMapper.countByExample(example);
+    public int userListByConditionCount(UserQuery userQuery) {
+        return userInfoDao.countByExample(userQuery);
     }
 
-
-    public int update(UserInfo record) {
-        return userInfoMapper.updateByPrimaryKeySelective(record);
-    }
-
+    @Override
     public List<UserInfo> selectByUserInfo(UserInfo u) {
         // TODO Auto-generated method stub
-        return userInfoMapper.selectByUserInfo(u);
+        return userInfoDao.selectByUserInfo(u);
     }
 
 }
