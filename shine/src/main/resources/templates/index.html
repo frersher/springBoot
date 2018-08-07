@@ -1,10 +1,28 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="en">
+<script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
     <meta chaset="utf-8"/>
     <title>首页</title>
 </head>
 <body>
-hello ajajaj 1234 2323423  2222  12312312
+<div id="example"></div>
+
+<Table data={data}  >
+    <Column  width={100} sort fixed resizable>
+        <HeaderCell>ID</HeaderCell>
+        <Cell dataKey="id" />
+    </Column>
+    <Column  width={100} sort resizable>
+        <HeaderCell>Name</HeaderCell>
+        <Cell dataKey="name" />
+    </Column>
+    <Column  width={100} sort resizable>
+        <HeaderCell>Email</HeaderCell>
+        <Cell dataKey="email" />
+    </Column>
+</Table>
 </body>
 </html>

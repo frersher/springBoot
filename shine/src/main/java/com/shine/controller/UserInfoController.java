@@ -34,7 +34,6 @@ public class UserInfoController {
 
     @RequestMapping("/loginPost")
     public String loginPost(UserInfo user) {
-        System.out.println("username :"+user.getUserNick()+" password:"+user.getUserPassword());
         return "index";
     }
 
