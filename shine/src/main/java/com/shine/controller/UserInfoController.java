@@ -11,6 +11,7 @@ import com.shine.basic.rsp.PageResponse;
 import com.shine.model.UserInfo;
 import com.shine.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -33,16 +34,20 @@ public class UserInfoController {
 
 
     @RequestMapping("/loginPost")
-    public String loginPost(UserInfo user) {
+    public String loginPost(UserInfo user,Model model) {
+        UserQuery userQuery = new UserQuery();
+        PageHelper.startPage(1,20);
+        Page<UserInfo> userList = (Page<UserInfo>)userService.userListByCondition(userQuery);
+        model.addAttribute("allUsers", userList.getResult());
         return "index";
     }
 
 
     @RequestMapping("/queryPageUser")
-    public  PageResponse<List<UserInfo>>  queryPageUser(){
+    public  PageResponse<List<UserInfo>>  queryPageUser(UserQuery query){
         PageResponse<List<UserInfo>> response = new PageResponse();
         UserQuery userQuery = new UserQuery();
-        PageHelper.startPage(2,2);
+        PageHelper.startPage(query.getPageNum(),query.getPageSize());
         Page<UserInfo> userList = (Page<UserInfo>)userService.userListByCondition(userQuery);
         response.setCount(userList.getTotal());
         response.setPageNum(userList.getPageNum());

@@ -48,9 +48,3 @@ CREATE TABLE `NEWS_INFO` (
   `NEWS_CONTENT` varchar(500) NOT NULL,
   PRIMARY KEY (`NEWS_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
-/*
-File - > setting - > plugins
-点击Browse Repositories输入lombok
-点击安装
-重启IDEA*/

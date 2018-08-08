@@ -1,28 +1,93 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="en">
-<script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
-<script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
-<script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/docs.css">
     <meta chaset="utf-8"/>
     <title>首页</title>
 </head>
-<body>
-<div id="example"></div>
+<!-- Javascript goes in the document HEAD -->
+<script type="text/javascript">
+    function altRows(id) {
+        if (document.getElementsByTagName) {
 
-<Table data={data}  >
-    <Column  width={100} sort fixed resizable>
-        <HeaderCell>ID</HeaderCell>
-        <Cell dataKey="id" />
-    </Column>
-    <Column  width={100} sort resizable>
-        <HeaderCell>Name</HeaderCell>
-        <Cell dataKey="name" />
-    </Column>
-    <Column  width={100} sort resizable>
-        <HeaderCell>Email</HeaderCell>
-        <Cell dataKey="email" />
-    </Column>
-</Table>
+            var table = document.getElementById(id);
+            var rows = table.getElementsByTagName("tr");
+
+            for (i = 0; i < rows.length; i++) {
+                if (i % 2 == 0) {
+                    rows[i].className = "evenrowcolor";
+                } else {
+                    rows[i].className = "oddrowcolor";
+                }
+            }
+        }
+    }
+    window.onload = function () {
+        altRows('alternatecolor');
+    }
+</script>
+
+<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+<style type="text/css">
+    table.altrowstable {
+        font-family: verdana, arial, sans-serif;
+        font-size: 11px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #a9c6c9;
+        border-collapse: collapse;
+    }
+
+    table.altrowstable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+
+    table.altrowstable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+
+    .oddrowcolor {
+        background-color: #d4e3e5;
+    }
+
+    .evenrowcolor {
+        background-color: #c3dde0;
+    }
+
+    .pagination {
+        float: right;
+    }
+
+    .paging {
+        float: right;
+    }
+</style>
+<div class="container">
+    <!-- Table goes in the document BODY -->
+    <table class="table table-bordered" id="alternatecolor">
+        <tr>
+            <th>昵称</th>
+            <th>邮箱</th>
+            <th>电话</th>
+        </tr>
+        <tr th:each="user,memberStat:${allUsers}">
+            <td th:text="${user.userNick}"/>
+            <td th:text="${user.userTel}"/>
+            <td th:text="${user.userMail}"/>
+        </tr>
+    </table>
+    <div id="test" class="paging"></div>
+</div>
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+<script type="text/javascript" src="/js/jPage-1.1.js"></script>
+<script type="text/javascript" src="/js/paging.js"></script>
 </body>
 </html>
