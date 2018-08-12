@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public abstract class BaseRequest implements Serializable {
 
     public static final Integer DEFAULT_PAGE_NUM = 1;
-    public static final Integer DEFAULT_PAGE_SIZE = 20;
+    public static final Integer DEFAULT_PAGE_SIZE = 2;
     private static final long serialVersionUID = -8819751388220084356L;
     private Integer pageNum;
 
