@@ -77,17 +77,23 @@
             <th>昵称</th>
             <th>邮箱</th>
             <th>电话</th>
+            <th>xxx</th>
         </tr>
         <tr th:each="user,memberStat:${allUsers}">
             <td th:text="${user.userNick}"/>
             <td th:text="${user.userTel}"/>
             <td th:text="${user.userMail}"/>
+            <td th:text="${pageSize}"/>
+
         </tr>
     </table>
-    <div id="test" class="paging"></div>
 </div>
+<div id="test" class="paging"></div>
 <script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
 <script type="text/javascript" src="/js/jPage-1.1.js"></script>
 <script type="text/javascript" src="/js/paging.js"></script>
+<script>
+
+</script>
 </body>
 </html>
