@@ -34,11 +34,12 @@ public class UserInfoController {
 
 
     @RequestMapping("/loginPost")
-    public String loginPost(UserInfo user,Model model) {
-        UserQuery userQuery = new UserQuery();
-        PageHelper.startPage(1,20);
-        Page<UserInfo> userList = (Page<UserInfo>)userService.userListByCondition(userQuery);
+    public String loginPost(UserQuery query,Model model) {
+        PageHelper.startPage(query.getPageNum(),query.getPageSize());
+        Page<UserInfo> userList = (Page<UserInfo>)userService.userListByCondition(query);
         model.addAttribute("allUsers", userList.getResult());
+        model.addAttribute("pageSize",userList.getPageSize());
+        model.addAttribute("total",userList.getTotal());
         return "index";
     }
 
