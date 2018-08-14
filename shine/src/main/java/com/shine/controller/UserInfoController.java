@@ -1,6 +1,8 @@
 package com.shine.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,10 +12,12 @@ import com.shine.basic.rep.UserQuery;
 import com.shine.basic.rsp.PageResponse;
 import com.shine.model.UserInfo;
 import com.shine.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 用户管理
@@ -35,13 +39,32 @@ public class UserInfoController {
 
     @RequestMapping("/loginPost")
     public String loginPost(UserQuery query,Model model) {
-        PageHelper.startPage(query.getPageNum(),query.getPageSize());
+       /* PageHelper.startPage(query.getPageNum(),query.getPageSize());
         Page<UserInfo> userList = (Page<UserInfo>)userService.userListByCondition(query);
         model.addAttribute("allUsers", userList.getResult());
         model.addAttribute("pageSize",userList.getPageSize());
-        model.addAttribute("total",userList.getTotal());
+        model.addAttribute("total",userList.getTotal());*/
         return "index";
     }
+
+    @RequestMapping("/queryPage")
+    @ResponseBody
+    public Map<String,Object> queryPage(UserQuery query) {
+        System.out.println(String.format("pageNum = %s,pageSize = %s",query.getPageNum(),query.getPageSize()));
+
+        PageHelper.startPage(query.getPageNum(),query.getPageSize());
+        Page<UserInfo> userList = (Page<UserInfo>)userService.userListByCondition(query);
+        Map resultMap = new HashMap<String, Object>();
+
+        resultMap.put("data", userList.getResult());
+        //页数信息配置
+        resultMap.put("limit", userList.getPageSize());
+        resultMap.put("page", userList.getPageSize());
+        resultMap.put("total",userList.getTotal());
+       // resultMap.put("iTotalDisplayRecords",userList.getTotal());
+        return resultMap;
+    }
+
 
 
     @RequestMapping("/queryPageUser")
