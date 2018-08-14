@@ -20,3 +20,21 @@
             $("#test").page({count: 12, pageNo: num, pageSize: 3, skipPart: true});
         }
     });
+
+
+    function pageChange(ele){
+        var obj = new Object();
+        obj.pageNum =ele.getAttribute("num");
+        $.ajax({
+            type: "POST",
+            url: "/user/loginPost",
+            dataType:"html",
+            data:obj,
+            success:function(data){
+                console.log(data);
+                $(".container").html(data);
+            }
+        });
+
+
+    }

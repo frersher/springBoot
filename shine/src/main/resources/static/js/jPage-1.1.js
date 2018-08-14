@@ -54,15 +54,15 @@
 				var html='<ul class="pagination">';
 				for(var i in json.algorithm){
 					if(json.algorithm[i].status=="disabled"){
-						html+='<li class="'+json.algorithm[i].status+'" num="'+json.algorithm[i].num+'" ><a href="javascript:;">'+json.algorithm[i].text+'</a></li>';
+						html+='<li name="pg" onclick="pageChange(this)" class="'+json.algorithm[i].status+'" num="'+json.algorithm[i].num+'" ><a href="#" ">'+json.algorithm[i].text+'</a></li>';
 					}
 					else if(json.algorithm[i].status=="active"){
-						html+='<li class="'+json.algorithm[i].status+'" num="'+json.algorithm[i].num+'" ><a href="javascript:;">'+json.algorithm[i].text+'</a></li>';
+						html+='<li name="pg"  onclick="pageChange(this)" class="'+json.algorithm[i].status+'" num="'+json.algorithm[i].num+'" ><a href="#" ">'+json.algorithm[i].text+'</a></li>';
 						
 					}else if(json.algorithm[i].num=="more"){
-						html+='<li class="disabled" num="'+json.algorithm[i].num+'" ><a href="javascript:;">'+json.algorithm[i].text+'</a></li>';
+						html+='<li name="pg" onclick="pageChange(this)" class="disabled" num="'+json.algorithm[i].num+'" ><a href="#" ">'+json.algorithm[i].text+'</a></li>';
 					}else{
-						html+='<li num="'+json.algorithm[i].num+'" ><a href="javascript:;">'+json.algorithm[i].text+'</a></li>';
+						html+='<li name="pg" onclick="pageChange(this)"  num="'+json.algorithm[i].num+'" ><a href="#" ">'+json.algorithm[i].text+'</a></li>';
 					}
 				}
 				$(that).html(html);
