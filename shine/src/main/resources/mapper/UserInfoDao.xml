@@ -8,6 +8,7 @@
     <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR" />
     <result column="USER_MAIL" property="userMail" jdbcType="VARCHAR" />
     <result column="USER_ROLE" property="userRole" jdbcType="VARCHAR" />
+    <result column="LOCKED" property="locked" jdbcType="TINYINT" />
   </resultMap>
 
   <sql id="conditionParams">
@@ -34,7 +35,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    USER_ID, USER_TEL, USER_NICK, USER_PASSWORD, USER_MAIL, USER_ROLE
+    USER_ID, USER_TEL, USER_NICK, USER_PASSWORD, USER_MAIL, USER_ROLE,LOCKED
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shine.basic.rep.UserQuery" >
     select
@@ -56,10 +57,10 @@
   </delete>
   <insert id="insert" parameterType="com.shine.model.UserInfo" >
     insert into USER_INFO (USER_ID, USER_TEL, USER_NICK, 
-      USER_PASSWORD, USER_MAIL, USER_ROLE
+      USER_PASSWORD, USER_MAIL, USER_ROLE,LOCKED
       )
     values (#{userId,jdbcType=INTEGER}, #{userTel,jdbcType=VARCHAR}, #{userNick,jdbcType=VARCHAR}, 
-      #{userPassword,jdbcType=VARCHAR}, #{userMail,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR}
+      #{userPassword,jdbcType=VARCHAR}, #{userMail,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR},#{locked,jdbcType=TINYINT}
       )
   </insert>
 
