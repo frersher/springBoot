@@ -29,8 +29,8 @@ public class DBCache {
 
     static {
         // TODO 假设这是数据库记录
-        USERS_CACHE.put("u1", new UserInfo(1, "123", "admin", "123", "123","admin",true));
-        USERS_CACHE.put("u1", new UserInfo(2, "456", "test", "456", "456","test",false));
+        USERS_CACHE.put("admin", new UserInfo(1, "123", "admin", "123", "123","admin",true));
+        USERS_CACHE.put("test", new UserInfo(2, "456", "test", "456", "456","test",false));
 
         PERMISSIONS_CACHE.put("admin", Arrays.asList("UserInfo:list", "UserInfo:add", "UserInfo:edit"));
         PERMISSIONS_CACHE.put("test", Collections.singletonList("UserInfo:list"));

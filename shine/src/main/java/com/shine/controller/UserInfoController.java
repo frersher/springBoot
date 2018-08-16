@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @create 2018-08-02 15:08
  **/
 @Controller
+@RequestMapping("/user/*")
 public class UserInfoController {
     private static final Logger logger = LogManager.getLogger(UserInfoController.class);
     @Resource
@@ -68,7 +69,7 @@ public class UserInfoController {
 
 
     @RequestMapping("/loginPost")
-    public String loginPost(UserQuery query,Model model) {
+    public String loginPost(UserQuery query) {
         // 想要得到 SecurityUtils.getSubject() 的对象．．访问地址必须跟 shiro 的拦截地址内．不然后会报空指针
         Subject sub = SecurityUtils.getSubject();
         // 用户输入的账号和密码,,存到UsernamePasswordToken对象中..然后由shiro内部认证对比,
