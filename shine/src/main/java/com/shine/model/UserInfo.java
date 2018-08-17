@@ -43,4 +43,7 @@ public class UserInfo {
         this.userRole = userRole;
         this.locked = locked;
     }
+
+    public UserInfo() {
+    }
 }
