@@ -42,7 +42,6 @@
             <!-- /.col-lg-12 -->
         </div>
     </div>
-
     <!-- /.container-fluid -->
 </div>
 <div id="bottom"></div>
@@ -50,17 +49,13 @@
 <script src="/js/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<!--<script src="/js/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>-->
-<!--<script src="/js/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>-->
-<script type="text/javascript">
-    $("#nav").load("/nav.html");
-    $("#bottom").load("/bottom.html");
-</script>
+<script src="/js/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/js/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
 <script type="text/javascript" src="/js/paging.js"></script>
 <script type="text/javascript">
-    // $("#nav").load("/nav.html");
-    // $("#bottom").load("/bottom.html");
+    $("#nav").load("/nav.html");
+    $("#bottom").load("/bottom.html");
     var cols =["userTel","userNick","userMail"]
     //datatables 分页
     pigeInit(cols);
