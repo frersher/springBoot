@@ -6,4 +6,17 @@ package threadLocal;
  * @Description:
  */
 public class UserObj {
+    private String name;
+
+    public UserObj(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

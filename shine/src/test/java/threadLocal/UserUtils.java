@@ -6,4 +6,7 @@ package threadLocal;
  * @Description:
  */
 public class UserUtils {
+    public static UserObj getCurrentUser(){
+        return ThreadContext.getUser();
+    }
 }
