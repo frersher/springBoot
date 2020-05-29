@@ -1,4 +1,6 @@
-package threadTest;
+package ThreadTest;
+
+import ThreadTest.SleepUtils;
 
 /**
  * @program: demo
@@ -47,7 +49,7 @@ public class ThreadSate {
         public void run() {
             synchronized (Blocked.class){
                 while (true){
-                    threadTest.SleepUtils.second(100);
+                    SleepUtils.second(100);
                 }
             }
         }

@@ -1,4 +1,4 @@
-package threadTest;
+package ThreadTest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

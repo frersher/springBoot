@@ -2,10 +2,7 @@ package com.shine.service;
 
 import java.util.List;
 
-import com.shine.dao.CityDao;
 import com.shine.model.City;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * 城市服务

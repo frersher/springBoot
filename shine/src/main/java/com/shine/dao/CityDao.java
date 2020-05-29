@@ -3,6 +3,7 @@ package com.shine.dao;
 import java.util.List;
 
 import com.shine.model.City;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 /**
  * 城市DAO
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
  * @author wb-cb236432
  * @create 2018-06-22 14:41
  **/
+@Mapper
 public interface CityDao {
     /**
      * 获取城市信息列表

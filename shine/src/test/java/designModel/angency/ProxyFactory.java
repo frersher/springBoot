@@ -21,7 +21,14 @@ public class ProxyFactory {
     public Object getProxyObject(){
        return  Proxy.newProxyInstance(target.getClass().getClassLoader(),
                  target.getClass().getInterfaces(),new InvocationHandler(){
-
+                   /**
+                    *
+                    * @param proxy 负责监听的对象
+                    * @param method 被拦截的业务方法
+                    * @param args 被拦截业务方法的实参
+                    * @return
+                    * @throws Throwable
+                    */
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                         System.out.println("before do something...");

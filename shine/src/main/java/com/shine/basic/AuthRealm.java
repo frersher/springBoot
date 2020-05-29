@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Configuration;
  * @author wb-cb236432
  * @create 2018-08-06 15:20
  **/
-@Configuration
+//@Configuration
 public class AuthRealm extends AuthorizingRealm {
 
     /**

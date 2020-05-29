@@ -3,6 +3,8 @@ package com.shine.controller;
 import com.shine.model.City;
 import com.shine.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,6 +20,7 @@ public class CityRestController {
 
     @RequestMapping(value = "/api/city/{id}", method = RequestMethod.GET)
     public City findOneCity(@PathVariable("id") Long id){
+
          return  cityService.findCityById(id);
     }
 }
