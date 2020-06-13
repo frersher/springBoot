@@ -1,5 +1,6 @@
 package CyclicBarrier;
 
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Map;
@@ -50,6 +51,8 @@ public class BankWaterService implements Runnable{
     public static void main(String[] args) {
         System.out.println(Period.between(LocalDate.parse("2020-04-05"), LocalDate.parse("2020-04-03")).getDays());
 
+        BankWaterService waterService = new BankWaterService();
+        waterService.count();
     }
 
 
