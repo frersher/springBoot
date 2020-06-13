@@ -1,9 +1,12 @@
 package designModel.angency.multiAgency;
 
 /**
- * Created by chenbang on 2019/12/9.
- * 主要业务接口
+ * 接口：申明需要被监听的行为
+ *
+ * @author cb
+ * @since 2020/6/13
  */
+
 public interface BaseService {
-     void eat(String  food);
+     void eat();
 }

@@ -4,25 +4,30 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
- * Created by chenbang on 2019/12/9.
  * 螳螂
+ *
+ * @author
+ * @since 2020/6/13
  */
+
 public class Mantis implements InvocationHandler {
 
-    private BaseService obj;
+    private BaseService cicada;
 
-    public Mantis(BaseService obj){
-        this.obj = obj;
+    public Mantis(BaseService cicada) {
+        this.cicada = cicada;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        method.invoke(cicada, args);
         eatCicada();
-        method.invoke(obj, args);
         return null;
     }
 
+
     private void eatCicada(){
-        System.out.println("螳螂捕蝉...");
+        System.out.println("螳螂捕蝉......");
     }
+
 }

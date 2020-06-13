@@ -1,11 +1,15 @@
 package designModel.angency.multiAgency;
 
 /**
- * Created by chenbang on 2019/12/9.
+ * TODO
+ *
+ * @author cb
+ * @since 2020/6/13
  */
+
 public class TestMain {
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
-        BaseService cicada = ProxyFactory.newInstane(Cicada.class);
-        cicada.eat("");
+        BaseService cicada =  ProxyFaxtory.newInstance(Cicada.class);
+        cicada.eat();
     }
 }

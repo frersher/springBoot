@@ -1,12 +1,15 @@
 package designModel.angency.multiAgency;
 
 /**
- * Created by chenbang on 2019/12/9.
  * 蝉
+ *
+ * @author cb
+ * @since 2020/6/13
  */
+
 public class Cicada implements BaseService{
     @Override
-    public void eat(String food) {
-        System.out.println("蝉吃树脂...");
+    public void eat() {
+        System.out.println("蝉吃树脂......");
     }
 }
