@@ -1,9 +1,14 @@
 package java8;
 
+import org.apache.tools.ant.types.resources.selectors.Compare;
+
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.maxBy;
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +28,9 @@ public class Client {
 //        calc4(artistList);
 //        flatMapTest();
 //        streamMin();
-        System.out.println(addUp(Stream.of(1,2,3)));
+//        System.out.println(addUp(Stream.of(1,2,3)));
+        Map<String,List<Artist>> resultMap = getArtistsByNational(artistList.stream());
+        System.out.println(resultMap);
     }
 
 
@@ -124,8 +131,36 @@ public class Client {
 
     private static List<Artist> initArtistData() {
         List<Artist> artistList = new ArrayList<>();
+        Artist artist1 = new Artist("张山", "1");
+        Artist artist2 = new Artist("李四", "2");
+        Artist artist3 = new Artist("王五", "1");
+        Artist artist4 = new Artist("赵六", "1");
+        Artist artist5 = new Artist("孙七", "2");
+        artistList.add(artist1);
+        artistList.add(artist2);
+        artistList.add(artist3);
+        artistList.add(artist4);
+        artistList.add(artist5);
         return artistList;
     }
+
+    /**
+     * 统计专辑最多的乐队
+     * @param artistStream
+     * @return
+     */
+    private static Optional<Artist> geBiggestGroup(Stream<Artist> artistStream){
+        Function<Artist, Long> getCount = artist -> artist.getMembers().count();
+        return artistStream.collect(maxBy(Comparator.comparing(getCount)));
+
+    }
+
+
+    private static Map<String,List<Artist>> getArtistsByNational(Stream<Artist> artistStream){
+        return artistStream.collect(groupingBy(artist -> artist.getNationality()));
+    }
+
+
 
 
 

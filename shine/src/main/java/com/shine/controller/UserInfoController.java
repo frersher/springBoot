@@ -1,8 +1,6 @@
 package com.shine.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 
@@ -97,7 +95,7 @@ public class UserInfoController {
     @RequestMapping("/queryPage")
     @ResponseBody
     public Map<String,Object> queryPage(UserQuery query) {
-        System.out.println(String.format("pageNum = %s,pageSize = %s",query.getPageNum(),query.getPageSize()));
+//        System.out.println(String.format("pageNum = %s,pageSize = %s",query.getPageNum(),query.getPageSize()));
 
         PageHelper.startPage(query.getPageNum(),query.getPageSize());
         Page<UserInfo> userList = (Page<UserInfo>)userService.userListByCondition(query);
@@ -125,6 +123,29 @@ public class UserInfoController {
         response.setPages(userList.getPages());
         response.setData(userList.getResult());
         return  response;
+    }
+
+
+    public static void main(String[] args)  {
+        try {
+            List<String> list = new ArrayList<String>();
+            list.add("abc");
+            list.add("bbc");
+            list.add("cbc");
+            Iterator<String> it = list.iterator();
+
+            List<String> list1 = new ArrayList<String>();
+            list1.add("abc");
+            list1.add("abc");
+            list1.add("cbc");
+            list1.add("cbc");
+
+            it.remove();
+
+            System.out.println(list.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
