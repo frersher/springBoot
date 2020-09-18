@@ -9,14 +9,9 @@ package designModel.angency;
 public class DynamicApp {
     public static void main(String[] args) {
         //目标对象
-        IUserDao target = new UserDao();
-
+        UserDao target = new UserDaoImpl();
         //目标对象创建代理对像
-        IUserDao proxy =(IUserDao)new ProxyFactory(target).getProxyObject();
-
-
+        UserDao proxy = (UserDao) new ProxyFactory(target).getProxyObject();
         proxy.save();
-
-
     }
 }

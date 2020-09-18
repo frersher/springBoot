@@ -30,19 +30,19 @@ public class CodeGenerator {
         //子工程的名称
         String projectName = "shine";
 
-        generateByTables(projectName, packageName,  "ads_jf_yxm_custom_data");
+        generateByTables(projectName, packageName,  "dwd_group_user_incre_d");
 
     }
 
     private void generateByTables(String projectName, String packageName, String... tableNames) {
 
         // 数据库信息
-        String dbUrl = "jdbc:mysql://192.168.55.131:3306/magic_user_center";
+        String dbUrl = "jdbc:mysql://192.168.55.85:3307/realtime_warehouse";
         DataSourceConfig dataSourceConfig = new DataSourceConfig()
                 .setDbType(DbType.MYSQL)
                 .setUrl(dbUrl)
-                .setUsername("yushijava")
-                .setPassword("yushi@123")
+                .setUsername("yushiadmin")
+                .setPassword("1FLASH1flash***")
                 .setDriverName("com.mysql.jdbc.Driver");
 
 

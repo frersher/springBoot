@@ -1,0 +1,41 @@
+<table>
+    <tr>
+        <th>属性</th>
+        <th>属性值</th>
+        <th>描述</th>
+    </tr >
+    <tr >
+        <td rowspan="3">支持当前事物</td>
+        <td>PROPAGATION_REQUIRED（必须的）</td>
+        <td>如果当前没有事物，就新建一个事物，如果已经存在一个事物中，加入到这个事物中。这是最常见的选择。</td>
+    </tr>
+    <tr>
+        <td>PROPAGATION_SUPPORTS（支持）</td>
+        <td>支持当前事物，如果当前没有事物，就以非事物方式执行。</td>
+    </tr>
+    <tr>
+        <td>PROPAGATION_MANDATORY（强制）</td>
+        <td>使用当前的事物，如果当前没有事物，就抛出异常。</td>
+    </tr>
+
+
+    <tr>
+        <td rowspan="3">不支持当前事物</td>
+        <td>PROPAGATION_REQUIRES_NEW(隔离)</td>
+        <td>新建事物，如果当前存在事物，把当前事物挂起。</td>
+    </tr>
+    <tr>
+        <td>PROPAGATION_NOT_SUPPORTED(不支持)</td>
+        <td>以非事物方式执行操作，如果当前存在事物，就把当前事物挂起。</td>
+    </tr>
+    <tr>
+        <td>PROPAGATION_NEVER(强制非事物)</td>
+        <td>以非事物方式执行，如果当前存在事物，则抛出异常。</td>
+    </tr>
+
+    <tr>
+        <td>套事物</td>
+        <td>PROPAGATION_NESTED（嵌套事物）</td>
+        <td>如果当前存在事物，则在嵌套事物内执行。如果当前没有事物，则执行与PROPAGATION_REQUIRED类似的操作。</td>
+    </tr>
+</table>

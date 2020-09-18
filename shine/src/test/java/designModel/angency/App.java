@@ -8,8 +8,8 @@ package designModel.angency;
  **/
 public class App {
     public static void main(String[] args) {
-        UserDao userDao = new UserDao();
-        UserProxy userProxy = new UserProxy(userDao);
+        UserDaoImpl userDaoImpl = new UserDaoImpl();
+        UserProxy userProxy = new UserProxy(userDaoImpl);
 
         userProxy.save();
     }
