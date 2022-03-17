@@ -22,6 +22,7 @@ public class DemoApplication implements CommandLineRunner {
 	@Resource
 	private FooService fooService;
 
+	//  新的开始
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
