@@ -14,6 +14,7 @@ public class DemoApplication {
 //	@Resource
 //	private FooService fooService;
 
+	//  新的开始
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
