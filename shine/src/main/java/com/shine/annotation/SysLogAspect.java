@@ -12,6 +12,11 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
 import java.lang.reflect.Method;
 import java.util.Date;
 
@@ -70,5 +75,31 @@ public class SysLogAspect {
         //调用service保存SysLog实体类到数据库
         sysLogService.saveSysLog(sysLog);
     }
+
+
+    public static void main(String[] args)
+    {
+        try
+        {
+            BufferedImage appletImg = ImageIO.read(new FileInputStream(new File("/Users/chenbang/Desktop/111.png")));
+            Graphics2D g2d = appletImg.createGraphics();
+
+            // 设置抗锯齿的属性
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+            BufferedImage centerImg = ImageIO.read(new File("/Users/chenbang/Desktop/222.png"));
+            g2d.drawImage(centerImg.getScaledInstance(centerImg.getWidth(), centerImg.getHeight(), Image.SCALE_SMOOTH), (appletImg.getWidth() - centerImg.getWidth()) / 2, (appletImg.getHeight() - centerImg.getHeight()) / 2, null);
+
+            // 关闭资源
+            g2d.dispose();
+            ImageIO.write(appletImg, "png", new File("/Users/chenbang/Desktop/222.png"));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 
 }

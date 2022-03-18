@@ -1,26 +1,18 @@
 package com.shine;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 import com.github.pagehelper.PageHelper;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
+import java.util.Properties;
 
 @SpringBootApplication
 @MapperScan("com.shine.dao")
-public class DemoApplication implements CommandLineRunner {
-	@Resource
-	private FooService fooService;
+public class DemoApplication {
+//	@Resource
+//	private FooService fooService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -43,22 +35,22 @@ public class DemoApplication implements CommandLineRunner {
 		return pageHelper;
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-      while (true){
-		  fooService.oom();
-	  }
-	}
-
-
-	@Component
-	private class FooService{
-		List<String> data = new ArrayList<>();
-
-		public void oom(){
-			data.add(IntStream.rangeClosed(1, 10_0000)
-					.mapToObj(__->"a")
-					.collect(Collectors.joining("")));
-		}
-	}
+//	@Override
+//	public void run(String... args) throws Exception {
+//      while (true){
+//		  fooService.oom();
+//	  }
+//	}
+//
+//
+//	@Component
+//	private class FooService{
+//		List<String> data = new ArrayList<>();
+//
+//		public void oom(){
+//			data.add(IntStream.rangeClosed(1, 10_0000)
+//					.mapToObj(__->"a")
+//					.collect(Collectors.joining("")));
+//		}
+//	}
 }

@@ -10,6 +10,7 @@ import com.shine.basic.Filter;
 import com.shine.basic.rep.UserQuery;
 import com.shine.basic.rsp.PageResponse;
 import com.shine.model.UserInfo;
+import com.shine.service.StrategyMain;
 import com.shine.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -39,7 +40,8 @@ public class UserInfoController {
     private static final Logger logger = LogManager.getLogger(UserInfoController.class);
     @Resource
     private UserService userService;
-
+    @Resource
+    private List<StrategyMain> strategys;
 
 
 
@@ -52,35 +54,35 @@ public class UserInfoController {
     @RequestMapping("/loginPost")
     public String loginPost(UserQuery query) {
         // 想要得到 SecurityUtils.getSubject() 的对象．．访问地址必须跟 shiro 的拦截地址内．不然后会报空指针
-        Subject sub = SecurityUtils.getSubject();
-        // 用户输入的账号和密码,,存到UsernamePasswordToken对象中..然后由shiro内部认证对比,
-        // 认证执行者交由 com.battcn.config.AuthRealm 中 doGetAuthenticationInfo 处理
-        // 当以上认证成功后会向下执行,认证失败会抛出异常
-        UsernamePasswordToken token = new UsernamePasswordToken(query.getUserNick(), query.getUserPassword());
-        try {
-            sub.login(token);
-        } catch (UnknownAccountException e) {
-            logger.error("对用户[{}]进行登录验证,验证未通过,用户不存在", query.getUserNick());
-            System.out.println(String.format("对用户[{}]进行登录验证,验证未通过,用户不存在 userName = %s", query.getUserNick()));
-            token.clear();
-            return "login";
-        } catch (LockedAccountException lae) {
-            logger.error("对用户[{}]进行登录验证,验证未通过,账户已锁定", query.getUserNick());
-            System.out.println(String.format("对用户[{}]进行登录验证,验证未通过,账户已锁定 userName = %s", query.getUserNick()));
-            token.clear();
-            return "login";
-        } catch (ExcessiveAttemptsException e) {
-            logger.error("对用户[{}]进行登录验证,验证未通过,错误次数过多", query.getUserNick());
-            System.out.println(String.format("对用户[{}]进行登录验证,验证未通过,错误次数过多 userName = %s", query.getUserNick()));
-            token.clear();
-            return "login";
-        } catch (AuthenticationException e) {
-            logger.error("对用户[{}]进行登录验证,验证未通过,堆栈轨迹如下", query.getUserNick(), e);
-            System.out.println(String.format("对用户[{}]进行登录验证,验证未通过,堆栈轨迹如下 userName = %s", query.getUserNick()));
-
-            token.clear();
-            return "login";
-        }
+//        Subject sub = SecurityUtils.getSubject();
+//        // 用户输入的账号和密码,,存到UsernamePasswordToken对象中..然后由shiro内部认证对比,
+//        // 认证执行者交由 com.battcn.config.AuthRealm 中 doGetAuthenticationInfo 处理
+//        // 当以上认证成功后会向下执行,认证失败会抛出异常
+//        UsernamePasswordToken token = new UsernamePasswordToken(query.getUserNick(), query.getUserPassword());
+//        try {
+//            sub.login(token);
+//        } catch (UnknownAccountException e) {
+//            logger.error("对用户[{}]进行登录验证,验证未通过,用户不存在", query.getUserNick());
+//            System.out.println(String.format("对用户[{}]进行登录验证,验证未通过,用户不存在 userName = %s", query.getUserNick()));
+//            token.clear();
+//            return "login";
+//        } catch (LockedAccountException lae) {
+//            logger.error("对用户[{}]进行登录验证,验证未通过,账户已锁定", query.getUserNick());
+//            System.out.println(String.format("对用户[{}]进行登录验证,验证未通过,账户已锁定 userName = %s", query.getUserNick()));
+//            token.clear();
+//            return "login";
+//        } catch (ExcessiveAttemptsException e) {
+//            logger.error("对用户[{}]进行登录验证,验证未通过,错误次数过多", query.getUserNick());
+//            System.out.println(String.format("对用户[{}]进行登录验证,验证未通过,错误次数过多 userName = %s", query.getUserNick()));
+//            token.clear();
+//            return "login";
+//        } catch (AuthenticationException e) {
+//            logger.error("对用户[{}]进行登录验证,验证未通过,堆栈轨迹如下", query.getUserNick(), e);
+//            System.out.println(String.format("对用户[{}]进行登录验证,验证未通过,堆栈轨迹如下 userName = %s", query.getUserNick()));
+//
+//            token.clear();
+//            return "login";
+//        }
         return "index";
     }
 
