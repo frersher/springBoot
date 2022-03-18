@@ -191,12 +191,12 @@
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-core-lgpl</artifactId>
-			<version>${jackson.version}</version>
+			<version>1.9.9</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-lgpl</artifactId>
-			<version>${jackson.version}</version>
+			<version>1.9.9</version>
 		</dependency>
 		<!-- HttpClinet HTTP请求 -->
 		<dependency>
