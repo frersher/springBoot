@@ -1,29 +1,22 @@
 package com.shine.controller;
 
-import java.util.*;
-
-import javax.annotation.Resource;
-
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.shine.basic.Filter;
 import com.shine.basic.rep.UserQuery;
 import com.shine.basic.rsp.PageResponse;
 import com.shine.model.UserInfo;
+import com.shine.service.FileSystemService;
 import com.shine.service.StrategyMain;
 import com.shine.service.UserService;
-import org.apache.commons.lang3.StringUtils;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Resource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,13 +35,18 @@ public class UserInfoController {
     private UserService userService;
     @Resource
     private List<StrategyMain> strategys;
+    @Resource
+    private FileSystemService fileSystemService;
 
 
 
     @GetMapping("/login")
-    public String login(String username,String password) {
+    public String login(String username,String password) throws Exception {
+        fileSystemService.downloadFile();
         return "login";
     }
+
+
 
 
     @RequestMapping("/loginPost")
@@ -128,26 +126,7 @@ public class UserInfoController {
     }
 
 
-    public static void main(String[] args)  {
-        try {
-            List<String> list = new ArrayList<String>();
-            list.add("abc");
-            list.add("bbc");
-            list.add("cbc");
-            Iterator<String> it = list.iterator();
 
-            List<String> list1 = new ArrayList<String>();
-            list1.add("abc");
-            list1.add("abc");
-            list1.add("cbc");
-            list1.add("cbc");
 
-            it.remove();
-
-            System.out.println(list.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 }
