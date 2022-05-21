@@ -22,9 +22,7 @@ import java.util.Vector;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 
@@ -134,7 +132,7 @@ public class FileSystemServiceImpl implements FileSystemService {
                 System.out.println(entry.getFilename());
                 String filename = entry.getFilename();
                 InputStream inputStream = sftp.get(filename);
-                InputStream topPaySecret = new ClassPathResource("pgpkey/topPaySecret.asc").getInputStream();
+                InputStream topPaySecret = new ClassPathResource("pgpkey/test/topPaySecret.asc").getInputStream();
                 String decryptXmlContent = PgpUtils.decryptFile(inputStream, topPaySecret);
                 System.out.println("decryptXmlContent \n "+ decryptXmlContent);
             }

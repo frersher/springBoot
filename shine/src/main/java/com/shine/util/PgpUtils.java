@@ -2,6 +2,7 @@ package com.shine.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
@@ -50,6 +52,7 @@ import org.bouncycastle.openpgp.operator.jcajce.JcePBESecretKeyDecryptorBuilder;
 import org.bouncycastle.openpgp.operator.jcajce.JcePGPDataEncryptorBuilder;
 import org.bouncycastle.openpgp.operator.jcajce.JcePublicKeyDataDecryptorFactoryBuilder;
 import org.bouncycastle.openpgp.operator.jcajce.JcePublicKeyKeyEncryptionMethodGenerator;
+import org.springframework.core.io.ClassPathResource;
 
 /**
  * pgp 加解密
@@ -64,7 +67,9 @@ public class PgpUtils {
         String result = pgpUtils.decryptFile(new FileInputStream(new File("/Users/cb/Desktop/log/TOPPAY_camt052_202204250800.xml")),
             new FileInputStream(new File("/Users/cb/Downloads/test/topPaySecret.asc")));
 
-        System.out.println(result);
+
+
+
 
         // Map<String, Object> map = XmlMapUtils.xmlStr2map(result, false);
         // //        System.out.println(map.size());
@@ -80,6 +85,8 @@ public class PgpUtils {
         // }
     }
 
+
+
     private static PgpUtils INSTANCE = null;
 
     public static PgpUtils getInstance() {
@@ -92,7 +99,7 @@ public class PgpUtils {
     }
 
 
-    public PGPPublicKey readPublicKey(InputStream in) throws IOException, PGPException {
+    public static PGPPublicKey readPublicKey(InputStream in) throws IOException, PGPException {
         in = PGPUtil.getDecoderStream(in);
         PGPPublicKeyRingCollection pgpPub = new PGPPublicKeyRingCollection(in);
 
